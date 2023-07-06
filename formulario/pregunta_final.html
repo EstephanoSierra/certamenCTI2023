@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="../img/logo_colegio2.png">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/estilos.css">
+    <title>Ctg Pregunta Final</title>
+</head>
+<body onload="informacion();" >
+
+    <form id="formulario" id="formulario"  method="POST" >
+            
+
+<br>
+           
+                <h1 class="titulo">Pregunta Final</h1>
+            
+        </div>
+          
+    </div >
+    <img class="logo" src="../img/logo_colegio2.png" alt="">
+    </div>
+
+
+    <br>
+    <label class="aspectos"><b> <h3>Aspectos a Calificar</h3> </b></label>
+        
+        
+        <br><br><br>
+    <div class="transparente">
+
+        <label> Espontaneidad </label><br>
+        <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+        <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+        <input type="range" value="0" min="0" max ="5" name="rango1" id="rango1" class="rango">
+        <label id='la1' class="label">0</label>              
+    </div>
+
+    <br>
+
+    <div class="transparente">
+    <label> Calidad de respuesta </label><br>
+    
+    <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+    
+    <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+    
+    <input value="0" type="range" min="0" max ="5" name="rango2" id="rango2" class="rango" >
+    
+    <span id='la2' class="label">0</span>
+    </div>  
+    </div>
+
+    <br>
+           
+
+        <input type="number" name="id" id="id" value="1" class="" >
+        <p class="card-text" id="idFinalista" name="idFinalista"></p>
+        
+        
+
+
+        <div class="right">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+ 
+              <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title mb-4" id="info"name="info"></h5>
+                    <br><br>
+                    <p class="card-text" id="edad" name="edad"></p>
+                    <p class="card-text" id="carrera" name="carrera"></p>  
+                    <p class="card-text" id="edad" name="edad"></p>
+                    <br><br>
+                    <p class="card-text" >Mensaje:</p> 
+                    <p class="card-text" id="desc" name="desc"></p>                  
+                     
+                </div>
+                
+              </div>
+              <div class="col-md-4">
+                <img src="" class="card-img-top" name="foto" id="foto">
+              </div>
+            </div>
+          </div>
+    
+        </div>
+
+
+       
+            <br><br><br>
+  
+    </div>
+
+
+    <div class="mover">
+        <button type="button" id="verificar" name="verificar" class="btn_pf" onclick="alerta();"><b>Confirmar</b></button>
+    </div>
+
+    <script src="../php/jquery-3.2.1.min.js"></script>
+
+
+    <script type="text/javascript">  
+
+function alerta()
+    {
+    var mensaje;
+    var opcion = confirm("Clicka en Aceptar o Cancelar");
+    if (opcion == true) {
+        mensaje = "Has clickado OK";
+        carga();
+        
+        
+
+    } else {
+        mensaje = "Has clickado Cancelar";
+    }
+
+}
+
+
+
+    function carga(){
+       
+     $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/insertarNota_pregunta_final.php",
+                data:datos,
+                success:function(){
+                }
+                });
+                });
+                
+                informacion();
+
+            }
+
+    function informacion(){
+        
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/informacionF.php",
+                data:datos,
+                success:function(info){
+                    $('#info').text(info);
+                }
+                });
+                });
+
+
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/edadF.php",
+                data:datos,
+                success:function(desc){
+                    $('#edad').text(desc);
+                }
+                });
+                });
+
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/carreraF.php",
+                data:datos,
+                success:function(desc){
+                    $('#carrera').text(desc);
+                }
+                });
+                });
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/descripcionF.php",
+                data:datos,
+                success:function(desc){
+                    $('#desc').text(desc);
+                }
+                });
+                });
+                
+                img();
+                idcaF();
+                
+    }
+
+    function img(){
+
+        
+$(document).ready(function(){
+
+var datos = $('#formulario').serialize();
+$.ajax({
+type:"POST",
+url:"../php/obtenerImg.php",
+data:datos,
+success:function(finalistas){
+
+    $("#foto").attr("src",finalistas);
+}
+});
+});
+
+
+    }
+    </script>  
+
+
+        </form>
+
+        
+
+ 
+    
+ 
+
+    <script src="../javascript/rango.js"></script>
+    <script src="../javascript/contador_final.js"></script>
+
+</body>
+</html>
+

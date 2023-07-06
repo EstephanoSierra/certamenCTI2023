@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="../img/logo_colegio2.png">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/estilos.css">
+    <title>Ctg Vestuario Casual</title>
+</head>
+<body onload="informacion();">
+    <form id="formulario" id="formulario"  method="POST" >
+            
+
+
+<br>    
+                            <h1 id="C" class="titulo" name="C">Vestuario Casual</h1>
+                        
+
+            
+                   
+            <br>    
+            </div >
+        <img class="logo" src="../img/logo_colegio2.png" alt=""></div>
+
+
+
+
+        <br>
+        <label class="aspectos"><b> <h3>Aspectos a Calificar</h3> </b></label>
+        
+        
+
+    <div class="transparente">
+
+        <label> Proyección Escénica </label><br>
+        <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+        <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+        <input type="range" value="0" min="0" max ="5" name="rango1" id="rango1" class="rango" >
+        <label id='la1' class="label">0</label>              
+    </div>
+    
+<br>
+
+    <div class="transparente">
+        <label> Elegancia </label><br>
+        <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+        <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+        <input value="0" type="range" min="0" max ="5" name="rango2" id="rango2" class="rango">
+        <span id='la2' class="label">0</span>
+    </div>  
+    <br>
+    <div class="transparente">
+        <label>Expresión facial</label><br>
+        <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+        <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+        <input  value="0" type="range" min="0" max ="5" name="rango3" id="rango3" class="rango" >
+        <span id='la3' class="label">0</span>
+    </div>
+    <br>
+    <div class="transparente">
+        <label>Modelaje</label><br>
+        <label id="lbn" class="lbn_0">0</label><label id="lbn" class="lbn_1">1</label><label id="lbn" class="lbn_2">2</label>
+        <label id="lbn" class="lbn_3">3</label><label id="lbn" class="lbn_4">4</label><label id="lbn" class="lbn_5">5</label>  
+        <input value="0" type="range" min="0" max ="5" name="rango4" id="rango4" class="rango">
+        <span id='la4' class="label">0</span>
+    </div>
+<br>
+
+
+</div>
+
+<br>
+           
+
+        <input type="number" name="id" id="id" value="1" class="invisible">
+        
+
+
+        <div class="right">
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+ 
+              <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title mb-4" id="info"name="info"></h5>
+                    <br><br>
+                    <p class="card-text" id="edad" name="edad"></p>
+                    <p class="card-text" id="carrera" name="carrera"></p>  
+                    <p class="card-text" id="edad" name="edad"></p>
+                    <br><br>
+                    <p class="card-text" >Mensaje:</p> 
+                    <p class="card-text" id="desc" name="desc"></p> 
+                                      
+                   
+                </div>
+                
+              </div>
+              <div class="col-md-4">
+                <img src="../img/candidatas/1.jpg" class="card-img-top" name="foto" id="foto">
+              </div>
+            </div>
+          </div>
+    
+        </div>
+
+
+       
+            <br><br><br>
+  
+    </div>
+
+
+
+    <div class=" mover">
+         <button type="button" id="verificar" name="verificar" class="btn_b" onclick="alerta();"><b>Confirmar</b></button>
+    </div>
+        
+    
+</div>
+
+        </form>
+
+        
+    <script src="../php/jquery-3.2.1.min.js"></script>
+
+
+    <script type="text/javascript">  
+function alerta()
+    {
+    var mensaje;
+    var opcion = confirm("UNA VEZ ENVIADO NO SE PODRA MODIFICAR LA PUNTUACION");
+    if (opcion == true) {
+        mensaje = "LA PUNTUACION SE GUARDO";
+        carga();
+        
+
+    } else {
+       
+    }
+
+}
+
+
+
+    function carga(){
+     $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/insertarNota_vestuario_casual.php",
+                data:datos,
+                success:function(){
+                }
+                });
+                });
+                informacion();
+
+            }
+    function informacion(){
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/informacion.php",
+                data:datos,
+                success:function(info){
+                    $('#info').text(info);
+                }
+                });
+                });
+               
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/edad.php",
+                data:datos,
+                success:function(desc){
+                    $('#edad').text(desc);
+                }
+                });
+                });
+
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/carrera.php",
+                data:datos,
+                success:function(desc){
+                    $('#carrera').text(desc);
+                }
+                });
+                });
+
+                $(document).ready(function(){
+
+                var datos = $('#formulario').serialize();
+                $.ajax({
+                type:"POST",
+                url:"../php/descripcion.php",
+                data:datos,
+                success:function(desc){
+                    $('#desc').text(desc);
+                }
+                });
+                });
+                idca();
+    }
+       
+    </script>  
+ 
+
+    <script src="../javascript/rango.js"></script>
+    <script src="../javascript/contador.js"></script>
+
+</body>
+</html>
+
